@@ -72,6 +72,7 @@ ul,ol{
     float: left;
     margin-left: 17px;
     margin-right: 17px; /*经测量两个li元素之间有34px的间距，所以每个li元素左右分别给17px*/
+    position: relative;
 }
 
 .topNavBar nav>ul>li>a{
@@ -84,9 +85,49 @@ ul,ol{
     display: block;/*加入边距后li的高度<a的高度，li没有包住a，加入block后解决该问题*/
 }
 
-.topNavBar nav>ul>li>a:hover{ /*hover:鼠标悬停*/
-    border-bottom: 3px solid rgb(244, 135, 133); /*1像素的实心下边框*/
+.topNavBar nav>ul>li.active::after{ /*hover:鼠标悬停*/
+    content: '';
+    display: block;
+    top: 100%;
+    height: 3px;
+    width: 100%;
+    background: #c88ef7;
+    animation: underline 0.3s;
 }
+@keyframes underline{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 100%;
+    }
+}
+.topNavBar .submenu{
+    display: none;
+}
+.topNavBar li.active >.submenu{
+    display: block;
+    position: absolute; /*由于submenu的长度可能会超出它对应的nav长度而导致这个nav与旁边两个中间的间距增加，所以让submenu绝对定位*/
+    background: #FFFFFF;
+    color: #3d4451;
+    top: 100%;
+    right: 0;
+    padding: 10px 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    animation: submenuslide 0.3s;
+}
+.topNavBar .submenu > li{
+    white-space: nowrap; /*设置了submenu相对上级li定位后，会导致submenu里的一行文字超出长度而换行，为了不让它换行则需要添加该语句*/
+}
+@keyframes submenuslide{
+    0%{
+        transform: translateX(-40%)
+    }
+    100%{
+        transform: translateX(0)
+    }
+}
+
 /*logo和nav两个class之前高都为33，现在为了使nav的底线与logo对齐，分别给两个元素再加7px到40的高，再通过调整padding-top/bottom来使两个元素高度对齐*/
 .topNavBar .logo{
     font-size: 24px;
