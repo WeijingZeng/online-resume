@@ -9,7 +9,7 @@
     position: fixed;
     justify-content: center;
     align-items: center;
-    z-index: 1; /*z-index较大的元素会覆盖较小的一个，让welcome page置于顶层*/
+    z-index: 2; /*z-index较大的元素会覆盖较小的一个，让welcome page置于顶层*/
 }
 .welcome.active{
     display: flex;

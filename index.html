@@ -10,7 +10,7 @@
     <div id="welcome" class="welcome active">
       <div class="loading"></div>
     </div>
-    <div class="topNavBar">
+    <div id="topNavBar" class="topNavBar">
       <div class="topNavBar-inner clearfix">
           <a class="logo" href="#" alt="logo" style="float:left;">
               <span class="rs">RS</span><span class="card">card</span><!--两个span元素中间如果有换行，显示时浏览器会自动加一个空格在两元素中间-->
@@ -169,7 +169,14 @@
     </section>
     <script>
       // 加载到这里就消除active
-      welcome.classList.remove('active')
+      setTimeout(function(){
+        welcome.classList.remove('active')
+      },1000)
+      // window.scrollY是获取已经滚动过的高度
+      // 当滚动高度不为0时，navbar浮起
+      window.onscroll = function(){
+        window.scrollY > 0 ? topNavBar.classList.add('floating') : topNavBar.classList.remove('floating')
+      }
     </script>
 </body>		
 </html>

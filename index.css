@@ -44,7 +44,15 @@ ul,ol{
     position: fixed;/* 使其脱离文档流 */
     width: 100%; /*不到万不得已不用width，因为这里脱离文档流后元素宽度会内缩，所以只能强制宽度占满*/
     /* 因为宽度已经100%，再加上padding-left/right的16px就会超出宽度，所以在这里取消左右边距，再单独加一个div来设置左右边距 */
-    
+    transition: all 0.4s;
+}
+
+.topNavBar.floating{
+    background: #FFFFFF;
+    color: #3d4451;
+    padding: 10px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
 .topNavBar .topNavBar-inner{
