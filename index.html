@@ -224,8 +224,23 @@
           let href = a.getAttribute('href') //拿到<a>里的href
           let element = document.querySelector(href) //找到href对应的元素
           let top = element.offsetTop //获取该元素到顶部的固定高度
-          window.scrollTo(0, top - 80)
-        }
+          //用setInterval()实现点击nav后慢慢滑动到目标元素
+          let times = 25 //移动25次
+          let duration = 500/times //多久动一次
+          let currentTop = window.scrollY //点击nav时的当前页面高度
+          let targetTop = top - 80 //需要跳转到的高度
+          let distancePerTime = (targetTop - currentTop)/times
+          let i = 0
+          //间隔一段时间执行一次
+          let move = setInterval(() => {
+            if(i === times){
+              window.clearInterval(move)
+              return
+            }
+            i = i+1
+            window.scrollTo(0, currentTop+distancePerTime*i)
+          },duration)
+        } 
       }
     </script>
 </body>		
