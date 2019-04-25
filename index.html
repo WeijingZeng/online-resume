@@ -45,7 +45,7 @@
       <div class="mask"></div>
     </div>
     <main>
-      <div id="siteAbout" class="userCard">
+      <div scrollTitle id="siteAbout" class="userCard">
           <div class="pictureAndText clearfix">
             <div class="picture">
               <img src="./img/selfie.JPEG" width="299" height="299" alt="Profile Photo">
@@ -103,7 +103,7 @@
       <p class="introduction">I am a newly graduated student who is passionate about web development and want to grow in this industry eagerly. When I was at school, I concentrated on web development that focuses on front-end and back-end. I familiar with HTML, CSS, JavaScript, MySQL, MongoDB, and Java as well. 
       </p>
     </main>
-    <section id="siteSkills" class="skills">
+    <section scrollTitle id="siteSkills" class="skills">
       <h2>Professional Skills</h2>
       <ol class="skillCard clearfix">
         <li>
@@ -144,7 +144,7 @@
         </li>    
       </ol>
     </section>
-    <section id="siteAlldemos" class="portfolio">
+    <section scrollTitle id="siteAlldemos" class="portfolio">
       <h2>Portfolio</h2>
       <nav>
         <ol class="portfolioCard clearfix">
@@ -184,11 +184,39 @@
       setTimeout(function(){
         welcome.classList.remove('active')
       },1000)
-
-      // window.scrollY是获取已经滚动过的高度
-      // 当滚动高度不为0时，navbar浮起
+      
+      let specialTags = document.querySelectorAll('[scrollTitle]')
+      let minIndex = 0
+      function findMinIndex(){
+        for(let i = 0; i < specialTags.length; i++){
+          if(Math.abs(specialTags[i].offsetTop - window.scrollY) < Math.abs(specialTags[minIndex].offsetTop - window.scrollY))
+            minIndex = i    
+        }
+      }
+      //让目标元素向下偏移，以制造出滚动到目标位置时元素向上弹出的效果
+      for(let i = 0; i < specialTags.length; i++){
+        specialTags[i].classList.add('offset')
+      }
+      setTimeout(function(){
+        specialTags[minIndex].classList.remove('offset')
+      },1000)
+      
       window.onscroll = function(){
+        // 当滚动高度不为0时，navbar浮起
+        // window.scrollY是获取已经滚动过的高度
         window.scrollY > 0 ? topNavBar.classList.add('floating') : topNavBar.classList.remove('floating')
+        
+        findMinIndex()
+        specialTags[minIndex].classList.remove('offset')
+        //滚动到目标元素后，nav对应标题自动高亮
+        let id = specialTags[minIndex].id
+        let a = document.querySelector('[href="#'+id+'"]')
+        let li = a.parentNode
+        let siblingAndme = li.parentNode.children
+        for(let i = 0; i < siblingAndme.length; i++){
+          siblingAndme[i].classList.remove('highlight')
+        }
+        li.classList.add('highlight')
       }
 
       let liTags = document.querySelectorAll('nav.navbar > ul > li')

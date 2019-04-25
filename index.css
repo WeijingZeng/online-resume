@@ -85,7 +85,8 @@ ul,ol{
     display: block;/*加入边距后li的高度<a的高度，li没有包住a，加入block后解决该问题*/
 }
 
-.topNavBar nav>ul>li.active::after{ /*hover:鼠标悬停*/
+.topNavBar nav>ul>li.active::after,
+.topNavBar nav>ul>li.highlight::after{ /*hover:鼠标悬停*/
     content: '';
     display: block;
     top: 100%;
@@ -155,6 +156,14 @@ ul,ol{
 .banner .mask{
     height: 515px;
     background-color: rgba(0,0,0,0.5) /*设置黑色蒙版 0.8是透明程度*/
+}
+
+[scrollTitle]{
+    transform: translateY(0);
+    transition: all 2s;
+}
+[scrollTitle].offset{
+    transform: translateY(200px);  /*向下偏移150px*/
 }
 
 .userCard{
@@ -331,12 +340,17 @@ section .progressBar{
     background: #e7daf1;
     border-radius: 2px;
     margin: 4px 0 36px;
+    overflow: hidden;
 }
-
 section .progressBar .progress{
     height: 100%;
     background: #c88ef7;
     border-radius: 2px;
+    transform: translateX(0);
+    transition: all 1s;
+}
+section.skills.offset .progressBar .progress{
+    transform: translateX(-100%);
 }
 
 section.portfolio{
