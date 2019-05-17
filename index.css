@@ -340,7 +340,7 @@ section .progressBar{
     background: #e7daf1;
     border-radius: 2px;
     margin: 4px 0 36px;
-    overflow: hidden;
+    overflow: hidden;  /*progress向左回缩时会溢出，所以需要*/
 }
 section .progressBar .progress{
     height: 100%;
@@ -350,7 +350,7 @@ section .progressBar .progress{
     transition: all 1s;
 }
 section.skills.offset .progressBar .progress{
-    transform: translateX(-100%);
+    transform: translateX(-100%);  /*向左回缩*/
 }
 
 section.portfolio{
